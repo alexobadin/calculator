@@ -1,5 +1,7 @@
 html {
   font-size: 62.5%;
+  font-family: 'Press Start 2P', cursive;
+  color: rgba(0, 0, 0, 0.506);
 }
 * {
   margin: 0;
@@ -10,6 +12,13 @@ body {
   display: flex;
   justify-content: center;
 }
+button {
+  font-family: inherit;
+}
+
+#on {
+  font-size: 1rem;
+}
 .container {
   position: relative;
 }
@@ -18,14 +27,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 30rem;
-  height: 10rem;
+  width: 30.5rem;
+  height: 10.8rem;
   z-index: 3;
 
   position: absolute;
 
-  top: 17.8rem;
-  left: -15.8rem;
+  top: 17.4rem;
+  left: -16rem;
+  background-color: #95c494;
+  border-radius: 6px;
 }
 
 img {

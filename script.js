@@ -32,9 +32,16 @@ const pushOperation = function (e) {
   if (calcObj.curOperation === '=') {
     console.log('please get operation');
   } else {
-    calcObj.numberString += e.target.value;
+    let stringLength = e.target.value.length;
+    if (calcObj.numberString.length <= 8) {
+      calcObj.numberString += e.target.value;
+      resultText.textContent += e.target.value;
+      console.log(calcObj);
+    } else {
+      console.log('hi');
+    }
   }
-  console.log(calcObj.numberString);
+  resultText.textContent = calcObj.numberString;
 };
 
 // Input numbers
@@ -75,7 +82,6 @@ addBtn.addEventListener('click', function () {
     calcObj.curOperation = '+';
     console.log(calcObj);
   } else if (calcObj.numberString === '') {
-    resultText.textContent = 'ВВЕДИТЕ ЧИСЛО';
     calcObj.curOperation = '+';
   } else if (calcObj.curOperation === '-') {
     calcObj.numberArr.push(Number(calcObj.numberString));
@@ -96,6 +102,7 @@ addBtn.addEventListener('click', function () {
   } else if (calcObj.curOperation === '/') {
     calcObj.numberArr.push(Number(calcObj.numberString));
     calcObj.produceNumArr[0] /= Number(calcObj.numberString);
+    calcObj.produceNumArr[0] = Math.ceil(calcObj.produceNumArr * 1000) / 1000;
     calcObj.numberString = '';
     calcObj.curOperation = '+';
 
@@ -117,7 +124,6 @@ subtractBtn.addEventListener('click', function () {
     calcObj.curOperation = '-';
     console.log(calcObj);
   } else if (calcObj.numberString === '') {
-    resultText.textContent = 'ВВЕДИТЕ ЧИСЛО';
     calcObj.curOperation = '-';
   } else if (calcObj.produceNumArr[0] === 0) {
     calcObj.numberArr.push(Number(calcObj.numberString));
@@ -136,6 +142,7 @@ subtractBtn.addEventListener('click', function () {
   } else if (calcObj.curOperation === '/') {
     calcObj.numberArr.push(Number(calcObj.numberString));
     calcObj.produceNumArr[0] /= Number(calcObj.numberString);
+    calcObj.produceNumArr[0] = Math.ceil(calcObj.produceNumArr * 1000) / 1000;
     calcObj.numberString = '';
     calcObj.curOperation = '-';
 
@@ -165,7 +172,6 @@ multiplyBtn.addEventListener('click', function () {
     calcObj.curOperation = '*';
     console.log(calcObj);
   } else if (calcObj.numberString === '') {
-    resultText.textContent = 'ВВЕДИТЕ ЧИСЛО';
     calcObj.curOperation = '*';
   } else if (calcObj.curOperation === '-') {
     calcObj.numberArr.push(Number(calcObj.numberString));
@@ -178,6 +184,7 @@ multiplyBtn.addEventListener('click', function () {
   } else if (calcObj.curOperation === '/') {
     calcObj.numberArr.push(Number(calcObj.numberString));
     calcObj.produceNumArr[0] /= Number(calcObj.numberString);
+    calcObj.produceNumArr[0] = Math.ceil(calcObj.produceNumArr * 1000) / 1000;
     calcObj.numberString = '';
     calcObj.curOperation = '*';
 
@@ -214,8 +221,7 @@ divisionBtn.addEventListener('click', function () {
     calcObj.curOperation = '/';
     console.log(calcObj);
   } else if (calcObj.numberString === '') {
-    resultText.textContent = 'ВВЕДИТЕ ЧИСЛО';
-    calcObj.curOperation = '';
+    calcObj.curOperation = '/';
   } else if (calcObj.curOperation === '-') {
     calcObj.numberArr.push(Number(calcObj.numberString));
     calcObj.produceNumArr[0] -= Number(calcObj.numberString);
@@ -250,6 +256,7 @@ divisionBtn.addEventListener('click', function () {
   } else {
     calcObj.numberArr.push(Number(calcObj.numberString));
     calcObj.produceNumArr[0] /= Number(calcObj.numberString);
+    calcObj.produceNumArr[0] = Math.ceil(calcObj.produceNumArr * 1000) / 1000;
     calcObj.numberString = '';
     calcObj.curOperation = '/';
 
@@ -295,6 +302,8 @@ equalBtn.addEventListener('click', function () {
   } else if (calcObj.curOperation === '/') {
     calcObj.numberArr.push(Number(calcObj.numberString));
     calcObj.produceNumArr[0] /= Number(calcObj.numberString);
+    calcObj.produceNumArr[0] = Math.ceil(calcObj.produceNumArr * 1000) / 1000;
+
     calcObj.numberString = '';
     calcObj.curOperation = '';
     calcObj.numberArr = [];
@@ -305,96 +314,18 @@ equalBtn.addEventListener('click', function () {
   }
 });
 
-// subtractBtn.addEventListener('click', function () {
-//   if (calcObj.curOperation !== '') {
-//     console.log('repeated operation');
-//   } else {
-//     calcObj.curOperation = '-';
-//     let x = Number(calcObj.numberString) - Number(calcObj.produceNumString);
-//     calcObj.produceNum = [];
-//     calcObj.number = [];
-//     calcObj.numberString = '';
+clearBtn.addEventListener('click', function () {
+  calcObj.produceNumArr = [0];
+  calcObj.numberArr = [];
+  calcObj.produceNumString = '';
+  calcObj.numberString = '';
+  calcObj.curOperation = '';
+  resultText.textContent = 'ПРИВЕТ!';
+  console.log(calcObj);
+});
 
-//     console.log(x);
-//     calcObj.produceNum.push(x);
-//     console.log(calcObj);
-//   }
-// });
-
-// let arrayA = [];
-// let arrayB = [];
-// let a;
-// let b;
-// let operator;
-// let produceNumber;
-// let condition = true;
-
-// const add = function (a, b) {
-//   return a + b;
-// };
-// const subtract = function (a, b) {
-//   return a - b;
-// };
-// const multiply = function (a, b) {
-//   return a * b;
-// };
-
-// const division = function (a, b) {
-//   return a / b;
-// };
-
-// const operation = function (e) {
-//   operator = e.target.value;
-//   console.log(operator);
-//   condition = false;
-// };
-
-// const pressNum = function (e) {
-//   if (condition) {
-//     arrayA.push(e.target.value);
-//     resultText.textContent = arrayA.join('');
-//     a = Number(arrayA.join(''));
-//     console.log(a);
-//   } else {
-//     arrayB.push(e.target.value);
-//     resultText.textContent = arrayB.join('');
-//     b = Number(arrayB.join(''));
-//     console.log(b);
-//   }
-// };
-
-// // const operate = function (...arr) {
-// //   if (arr.includes('+')) {
-// //     return add(a, b);
-// //   } else if (arr.includes('-')) {
-// //     return subtract(a, b);
-// //   } else if (arr.includes('*')) {
-// //     multiply(a, b);
-// //   } else if (arr.includes('/')) {
-// //     return division(a, b);
-// //   }
-// // };
-// addBtn.addEventListener('click', function (e) {
-//   operation(e);
-//   add(a, b);
-//   produceNumber = add(a, b);
-//   console.log(produceNumber);
-// });
-
-// btn1.addEventListener('click', function (e) {
-//   pressNum(e);
-// });
-
-// btn7.addEventListener('click', function (e) {
-//   pressNum(e);
-// });
-
-// // addEventListener('click', function (e) {
-// //     e.preventDefault();
-// //     a = Number(firstNum.value);
-// //     b = Number(secNum.value);
-// //     operator = oper.value;
-// //     result.textContent = operate(a, operator, b);
-// //   });
-
-// onBtn.addEventListener('click', function (e) {});
+backBtn.addEventListener('click', function () {
+  calcObj.numberString = calcObj.numberString.slice(0, -1);
+  resultText.textContent = calcObj.numberString;
+  console.log(calcObj);
+});
