@@ -19,6 +19,7 @@ const onBtn = document.querySelector('#on');
 const backBtn = document.querySelector('#back');
 const clearBtn = document.querySelector('#clear');
 const resultText = document.querySelector('.result');
+const textArea = document.querySelector('.text');
 
 const calcObj = {
   produceNumArr: [0],
@@ -28,20 +29,23 @@ const calcObj = {
   curOperation: '',
 };
 
+let condition = false;
+
 const pushOperation = function (e) {
-  if (calcObj.curOperation === '=') {
-    console.log('please get operation');
-  } else {
-    let stringLength = e.target.value.length;
-    if (calcObj.numberString.length <= 8) {
-      calcObj.numberString += e.target.value;
-      resultText.textContent += e.target.value;
-      console.log(calcObj);
+  if (condition) {
+    if (calcObj.curOperation === '=') {
+      console.log('please get operation');
     } else {
-      console.log('hi');
+      if (calcObj.numberString.length <= 8) {
+        calcObj.numberString += e.target.value;
+        resultText.textContent += e.target.value;
+        console.log(calcObj);
+      } else {
+        console.log('hi');
+      }
     }
+    resultText.textContent = calcObj.numberString;
   }
-  resultText.textContent = calcObj.numberString;
 };
 
 // Input numbers
@@ -320,12 +324,28 @@ clearBtn.addEventListener('click', function () {
   calcObj.produceNumString = '';
   calcObj.numberString = '';
   calcObj.curOperation = '';
-  resultText.textContent = 'ПРИВЕТ!';
   console.log(calcObj);
+  resultText.textContent = '';
 });
 
 backBtn.addEventListener('click', function () {
   calcObj.numberString = calcObj.numberString.slice(0, -1);
   resultText.textContent = calcObj.numberString;
   console.log(calcObj);
+});
+
+onBtn.addEventListener('click', function () {
+  textArea.classList.toggle('color');
+  if (!condition) {
+    condition = true;
+  } else {
+    condition = false;
+    calcObj.produceNumArr = [0];
+    calcObj.numberArr = [];
+    calcObj.produceNumString = '';
+    calcObj.numberString = '';
+    calcObj.curOperation = '';
+    console.log(calcObj);
+    resultText.textContent = '';
+  }
 });

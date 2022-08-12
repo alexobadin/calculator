@@ -14,6 +14,7 @@ body {
 }
 button {
   font-family: inherit;
+  border-radius: 5px;
 }
 
 #on {
@@ -32,11 +33,17 @@ button {
   z-index: 3;
 
   position: absolute;
-
+  background-color: #c3c3c3;
+  transition: 0.5s;
   top: 17.4rem;
   left: -16rem;
-  background-color: #95c494;
+
   border-radius: 6px;
+}
+
+.color {
+  background-color: #95c494;
+  transition: 0.5s;
 }
 
 img {
