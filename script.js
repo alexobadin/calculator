@@ -20,6 +20,8 @@ const backBtn = document.querySelector('#back');
 const clearBtn = document.querySelector('#clear');
 const resultText = document.querySelector('.result');
 const textArea = document.querySelector('.text');
+const operatorText = document.querySelector('.operator');
+const sound = document.querySelector('#audio');
 
 const calcObj = {
   produceNumArr: [0],
@@ -31,7 +33,13 @@ const calcObj = {
 
 let condition = false;
 
+const displayOperation = function (e) {
+  if (condition || calcObj.numberString.length !== 0 || calcObj.produceNumArr[0] !== 0) {
+    operatorText.textContent = e;
+  }
+};
 const pushOperation = function (e) {
+  //   soundPlay();
   if (condition) {
     if (calcObj.curOperation === '=') {
       console.log('please get operation');
@@ -47,6 +55,13 @@ const pushOperation = function (e) {
     resultText.textContent = calcObj.numberString;
   }
 };
+
+// const soundPlay = function () {
+//   const soundEffect = new Audio();
+//   soundEffect.autoplay = true;
+//   sound.currentTime = 0;
+//   soundEffect.src = 'sound.mp3';
+// };
 
 // Input numbers
 btn1.addEventListener('click', function (e) {
@@ -82,6 +97,8 @@ btn0.addEventListener('click', function (e) {
 
 // Operations
 addBtn.addEventListener('click', function () {
+  //   soundPlay();
+  displayOperation('+');
   if (calcObj.curOperation === '=') {
     calcObj.curOperation = '+';
     console.log(calcObj);
@@ -124,6 +141,8 @@ addBtn.addEventListener('click', function () {
 });
 
 subtractBtn.addEventListener('click', function () {
+  //   soundPlay();
+  displayOperation('-');
   if (calcObj.curOperation === '=') {
     calcObj.curOperation = '-';
     console.log(calcObj);
@@ -172,6 +191,8 @@ subtractBtn.addEventListener('click', function () {
 });
 
 multiplyBtn.addEventListener('click', function () {
+  //   soundPlay();
+  displayOperation('*');
   if (calcObj.curOperation === '=') {
     calcObj.curOperation = '*';
     console.log(calcObj);
@@ -221,6 +242,8 @@ multiplyBtn.addEventListener('click', function () {
 });
 
 divisionBtn.addEventListener('click', function () {
+  //   soundPlay();
+  displayOperation('/');
   if (calcObj.curOperation === '=') {
     calcObj.curOperation = '/';
     console.log(calcObj);
@@ -272,53 +295,58 @@ divisionBtn.addEventListener('click', function () {
 //EQUAL
 
 equalBtn.addEventListener('click', function () {
-  calcObj.numberArr.push(Number(calcObj.numberString));
-  if (calcObj.curOperation === '+') {
+  //   soundPlay();
+  displayOperation('=');
+  if (condition) {
     calcObj.numberArr.push(Number(calcObj.numberString));
-    calcObj.produceNumArr[0] += Number(calcObj.numberString);
-    calcObj.numberString = '';
-    calcObj.curOperation = '';
-    calcObj.numberArr = [];
-    calcObj.curOperation = '=';
+    if (calcObj.curOperation === '+') {
+      calcObj.numberArr.push(Number(calcObj.numberString));
+      calcObj.produceNumArr[0] += Number(calcObj.numberString);
+      calcObj.numberString = '';
+      calcObj.curOperation = '';
+      calcObj.numberArr = [];
+      calcObj.curOperation = '=';
 
-    resultText.textContent = calcObj.produceNumArr;
-    console.log(calcObj);
-  } else if (calcObj.curOperation === '-') {
-    calcObj.numberArr.push(Number(calcObj.numberString));
-    calcObj.produceNumArr[0] -= Number(calcObj.numberString);
-    calcObj.numberString = '';
-    calcObj.curOperation = '';
-    calcObj.numberArr = [];
-    calcObj.curOperation = '=';
+      resultText.textContent = calcObj.produceNumArr;
+      console.log(calcObj);
+    } else if (calcObj.curOperation === '-') {
+      calcObj.numberArr.push(Number(calcObj.numberString));
+      calcObj.produceNumArr[0] -= Number(calcObj.numberString);
+      calcObj.numberString = '';
+      calcObj.curOperation = '';
+      calcObj.numberArr = [];
+      calcObj.curOperation = '=';
 
-    resultText.textContent = calcObj.produceNumArr;
-    console.log(calcObj);
-  } else if (calcObj.curOperation === '*') {
-    calcObj.numberArr.push(Number(calcObj.numberString));
-    calcObj.produceNumArr[0] *= Number(calcObj.numberString);
-    calcObj.numberString = '';
-    calcObj.curOperation = '';
-    calcObj.numberArr = [];
-    calcObj.curOperation = '=';
+      resultText.textContent = calcObj.produceNumArr;
+      console.log(calcObj);
+    } else if (calcObj.curOperation === '*') {
+      calcObj.numberArr.push(Number(calcObj.numberString));
+      calcObj.produceNumArr[0] *= Number(calcObj.numberString);
+      calcObj.numberString = '';
+      calcObj.curOperation = '';
+      calcObj.numberArr = [];
+      calcObj.curOperation = '=';
 
-    console.log(calcObj);
-    resultText.textContent = calcObj.produceNumArr;
-  } else if (calcObj.curOperation === '/') {
-    calcObj.numberArr.push(Number(calcObj.numberString));
-    calcObj.produceNumArr[0] /= Number(calcObj.numberString);
-    calcObj.produceNumArr[0] = Math.ceil(calcObj.produceNumArr * 1000) / 1000;
+      console.log(calcObj);
+      resultText.textContent = calcObj.produceNumArr;
+    } else if (calcObj.curOperation === '/') {
+      calcObj.numberArr.push(Number(calcObj.numberString));
+      calcObj.produceNumArr[0] /= Number(calcObj.numberString);
+      calcObj.produceNumArr[0] = Math.ceil(calcObj.produceNumArr * 1000) / 1000;
 
-    calcObj.numberString = '';
-    calcObj.curOperation = '';
-    calcObj.numberArr = [];
-    calcObj.curOperation = '=';
+      calcObj.numberString = '';
+      calcObj.curOperation = '';
+      calcObj.numberArr = [];
+      calcObj.curOperation = '=';
 
-    console.log(calcObj);
-    resultText.textContent = calcObj.produceNumArr;
+      console.log(calcObj);
+      resultText.textContent = calcObj.produceNumArr;
+    }
   }
 });
 
 clearBtn.addEventListener('click', function () {
+  //   soundPlay();
   calcObj.produceNumArr = [0];
   calcObj.numberArr = [];
   calcObj.produceNumString = '';
@@ -326,17 +354,29 @@ clearBtn.addEventListener('click', function () {
   calcObj.curOperation = '';
   console.log(calcObj);
   resultText.textContent = '';
+  operatorText.textContent = '';
 });
 
 backBtn.addEventListener('click', function () {
+  //   soundPlay();
   calcObj.numberString = calcObj.numberString.slice(0, -1);
   resultText.textContent = calcObj.numberString;
   console.log(calcObj);
 });
 
 onBtn.addEventListener('click', function () {
+  //   soundPlay();
   textArea.classList.toggle('color');
   if (!condition) {
+    condition = false;
+    calcObj.produceNumArr = [0];
+    calcObj.numberArr = [];
+    calcObj.produceNumString = '';
+    calcObj.numberString = '';
+    calcObj.curOperation = '';
+    console.log(calcObj);
+    resultText.textContent = '';
+    operatorText.textContent = '';
     condition = true;
   } else {
     condition = false;
@@ -347,5 +387,6 @@ onBtn.addEventListener('click', function () {
     calcObj.curOperation = '';
     console.log(calcObj);
     resultText.textContent = '';
+    operatorText.textContent = '';
   }
 });

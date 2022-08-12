@@ -1,7 +1,7 @@
 html {
   font-size: 62.5%;
   font-family: 'Press Start 2P', cursive;
-  color: rgba(0, 0, 0, 0.506);
+  color: rgba(0, 0, 0, 0.626);
 }
 * {
   margin: 0;
@@ -11,10 +11,23 @@ html {
 body {
   display: flex;
   justify-content: center;
+  height: 100vh;
+  background: rgb(0, 198, 255);
+  background: linear-gradient(339deg, rgba(0, 198, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
 }
 button {
   font-family: inherit;
   border-radius: 5px;
+  color: #313131;
+}
+h2 {
+  font-size: 1.2;
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+}
+.fix-position {
+  transform: translateX(0.8rem);
 }
 
 #on {
@@ -25,6 +38,7 @@ button {
 }
 
 .text {
+  font-size: 1.4rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,6 +48,7 @@ button {
 
   position: absolute;
   background-color: #c3c3c3;
+  box-shadow: inset 0 0 2px #000000;
   transition: 0.5s;
   top: 17.4rem;
   left: -16rem;
@@ -75,4 +90,8 @@ img {
 #equal {
   grid-column-start: -1;
   grid-column-end: -3;
+}
+
+.active {
+  background-color: #ababab;
 }
