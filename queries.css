@@ -1,6 +1,17 @@
+@media (max-width: 200rem) {
+  html {
+    font-size: 80%;
+
+    overflow: hidden;
+  }
+}
 @media (max-width: 80rem) {
   html {
-    font-size: 55%;
+    font-size: 60%;
     overflow: hidden;
+  }
+
+  button {
+    font-size: 2rem;
   }
 }

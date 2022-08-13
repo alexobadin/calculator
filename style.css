@@ -2,24 +2,40 @@ html {
   font-size: 62.5%;
   font-family: 'Press Start 2P', cursive;
   color: rgba(0, 0, 0, 0.626);
+  touch-action: pan-x pan-y;
 }
 * {
   margin: 0;
   padding: 0;
+  touch-action: manipulation;
 }
 
 body {
   display: flex;
   justify-content: center;
   height: 100vh;
-  background: rgb(0, 198, 255);
-  background: linear-gradient(339deg, rgba(0, 198, 255, 1) 0%, rgba(255, 255, 255, 1) 100%);
+  background: rgb(255, 255, 255);
+  background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(70, 234, 252, 1) 100%);
+
+  touch-action: pan-x pan-y;
+  touch-action: none;
 }
 button {
   font-family: inherit;
+  font-size: 1.8rem;
   border-radius: 5px;
   color: #313131;
+
+  border: 1px solid black;
+  box-shadow: 2px 4px 2px rgb(22, 22, 22);
+  transition: 0.1s;
 }
+button:active {
+  background-color: #6d6d6d;
+  box-shadow: 1px 1px rgb(22, 22, 22);
+  transition: 0.1s;
+}
+
 h2 {
   font-size: 1.2;
   position: absolute;
@@ -49,7 +65,7 @@ h2 {
   position: absolute;
   background-color: #c3c3c3;
   box-shadow: inset 0 0 2px #000000;
-  transition: 0.5s;
+  transition: 0.3s;
   top: 17.4rem;
   left: -16rem;
 
@@ -58,7 +74,7 @@ h2 {
 
 .color {
   background-color: #95c494;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 
 img {
@@ -92,6 +108,27 @@ img {
   grid-column-end: -3;
 }
 
+.eqv {
+  background-color: #9dbeff;
+}
+
+.operators {
+  background-color: #ffc87a;
+}
+
+.buttons {
+  background-color: #838383;
+  color: #ffffff;
+}
+
+.on {
+  background-color: #ffffff;
+  transition: 0.3s;
+}
 .active {
-  background-color: #ababab;
+  background-color: #ff7373;
+  transition: 0.3s;
+}
+.touch {
+  background-color: #95c494;
 }
